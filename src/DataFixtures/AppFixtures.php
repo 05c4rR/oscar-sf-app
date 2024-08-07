@@ -8,7 +8,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 // DECOMMENTER POUR LA VARIANTE ORM
 // use Faker\ORM\Doctrine\Populator;
-// use Doctrine\ORM\Mapping\Entity;
 
 class AppFixtures extends Fixture
 {

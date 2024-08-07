@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}category{% endblock %}
+
+{% block body %}
+    {{parent()}}
+
+    <div class="d-flex gap-4">
+    {% for category in categories %}
+            <div class="card">
+                <div class="card-body shadow-sm">
+                    <h5 class="card-title text-center"> {{category.name|upper}} </h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+    {% else %}
+        <p>Aucune catégories trouvées</p>
+    {% endfor %}
+    </div>
+
+    </div>
+{% endblock %}
