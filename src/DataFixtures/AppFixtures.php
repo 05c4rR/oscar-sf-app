@@ -13,17 +13,18 @@ use Doctrine\Persistence\ObjectManager;
 class AppFixtures extends Fixture
 {
     private const NB_ARTICLES = 100;
+    private const NB_CATEGORIES = 4;
+
 
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-
         $categories = [];
 
         // GENERATION DES CATEGORIES
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < self::NB_CATEGORIES; $i++) {
             // nouvelles instances de Category
-            $category = new Category();
+            $category = new Category;
             $category->setName($faker->word());
 
             // on les persist pour les envoyer dans la bdd
@@ -42,15 +43,18 @@ class AppFixtures extends Fixture
                 ->setVisible($faker->boolean())
                 // ici on attribue une catégorie aléatoirement à chaque article depuis la liste de Categories
                 ->setCategory($categories[random_int(0, count($categories) - 1)]);
+                // On pourrait aussi faire ->setCategory($faker->randomElement($categories))
             $manager->persist($article);
         };
         $manager->flush(); // communication avec la bdd
         
+
         // EXEMPLE DE ORM INTEGRATION AVEC DOCTRINE
         //
         // $generator = Factory::create();
         // $populator = new Populator($generator, $manager);
-        // $populator->addEntity(Article::class,10);
+        // $populator->addEntity(Category::class,self::NB_CATEGORIES);
+        // $populator->addEntity(Article::class,self::NB_ARTICLES);
         // $populator->execute();
 
     }
